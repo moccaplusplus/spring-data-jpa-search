@@ -1,0 +1,36 @@
+group = 'com.tomaszgawel.spring.data.jpa.search';
+version = '1.0-SNAPSHOT';
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.7.RELEASE")
+    }
+}
+
+apply([ plugin: 'idea' ]);
+apply([ plugin: 'java' ]);
+apply([ plugin: 'spring-boot' ]);
+apply([ plugin: 'war' ]);
+
+sourceCompatibility = 1.8;
+targetCompatibility = 1.8;
+
+dependencies ({ DependencyHandler d ->
+    d.add('compile', project(':lib'));
+
+    compile('org.springframework.boot:spring-boot-starter-web:1.2.6.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa:1.2.7.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-actuator:1.2.6.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-security:1.2.7.RELEASE')
+
+    runtime("mysql:mysql-connector-java:5.1.25")
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat:1.2.6.RELEASE')
+
+    d.add('testCompile', [ group: 'junit', name: 'junit', version: '4.11' ]);
+    d.add('testCompile', 'org.springframework.boot:spring-boot-starter-test:1.2.6.RELEASE');
+});

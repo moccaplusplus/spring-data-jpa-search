@@ -1,0 +1,23 @@
+apply([ plugin: 'java' ]);
+
+sourceCompatibility = 1.8;
+targetCompatibility = 1.8;
+
+configurations ({ ->
+    provided
+});
+
+sourceSets ({ ->
+    main.compileClasspath += configurations.provided;
+    test.compileClasspath += configurations.provided;
+    test.runtimeClasspath += configurations.provided;
+});
+plugins.withType(IdeaPlugin, { ->
+    idea.module.scopes.PROVIDED.plus = [ configurations.provided ];
+});
+
+dependencies({
+    compile('org.springframework.data:spring-data-jpa:1.9.0.RELEASE')
+    provided('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final');
+    testCompile([group: 'junit', name: 'junit', version: '4.11']);
+});

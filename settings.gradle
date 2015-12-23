@@ -1,0 +1,3 @@
+rootProject.name = 'SpringDataJpaSearch'
+include 'lib', 'sample'
+

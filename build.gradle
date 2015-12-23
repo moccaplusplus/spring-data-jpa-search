@@ -1,0 +1,13 @@
+group = 'com.tomaszgawel.spring.data.jpa.search';
+version = '1.0-SNAPSHOT';
+
+allprojects ({ e->
+    apply([ plugin: 'idea' ]);
+});
+
+subprojects ({ s ->
+    repositories ({ r ->
+        jcenter();
+        mavenCentral();
+    });
+});
